@@ -1,4 +1,5 @@
 import {findAllCourses, findAllUsers, findLessonsForCourse} from './db-data';
+import {MONGO_CONNECTION} from '../env';
 
 const util = require('util');
 
@@ -25,7 +26,8 @@ var ObjectId = require('mongodb').ObjectID;
 *
 *****************************************************************************************************/
 
-const MONGODB_CONNECTION_URL = 'mongodb+srv://nestjs:ZeEjdswOWHwoenQO@cluster0-dbucq.gcp.mongodb.net';
+// const MONGODB_CONNECTION_URL = 'mongodb+srv://nestjs:ZeEjdswOWHwoenQO@cluster0-dbucq.gcp.mongodb.net';
+const MONGODB_CONNECTION_URL = MONGO_CONNECTION;
 
 // Database Name
 const dbName = 'nestjs-course';
