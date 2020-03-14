@@ -1,8 +1,8 @@
 
 export interface Course {
   _id: string;
-  seqNo:number;
-  url:string;
+  seqNo: number;
+  url: string;
   iconUrl: string;
   courseListIcon: string;
   description: string;
