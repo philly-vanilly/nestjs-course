@@ -1,9 +1,11 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Req, Res} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Delete, Get, HttpException, Param, Post, Put, Req, Res, UseFilters} from '@nestjs/common';
 import {Course} from '../../../../shared/course';
 import {CoursesRepository} from '../repositories/courses.repository';
 import {Request, Response} from 'express';
+// import {HttpExceptionFilter} from '../../filters/http-exception.filter';
 
 @Controller('/courses')
+// @UseFilters(new HttpExceptionFilter())
 export class CoursesController {
   constructor(
     private coursesRepository: CoursesRepository
@@ -38,6 +40,7 @@ export class CoursesController {
   }
 
   @Put(':courseId')
+  // @UseFilters(new HttpExceptionFilter())
   async updateCourse(
     @Param("courseId") courseId: string,
     @Body() changes: Partial<Course>
@@ -45,6 +48,13 @@ export class CoursesController {
     // you should return the promise even if you don't use the value in order for
     // NestJS to terminate the ongoing request
     console.log(`updating course ${courseId}`);
+
+    if (changes._id) {
+      // throw new HttpException("Can't update course id", 400); // generic Express exception
+      // see also: https://docs.nestjs.com/exception-filters
+      throw new BadRequestException("Can't update course id");
+    }
+
     return this.coursesRepository.updateCourse(courseId, changes);
   }
 
