@@ -4,6 +4,8 @@ import {ValidationException} from './validation.exception';
 @Catch(ValidationException)
 export class ValidationFilter implements ExceptionFilter {
   catch(exception: ValidationException, host: ArgumentsHost): any {
+    console.log("Validation exception handler triggered ", JSON.stringify(exception));
+
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
 
