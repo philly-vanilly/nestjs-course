@@ -1,6 +1,7 @@
 import {ArgumentsHost, Catch, ExceptionFilter} from '@nestjs/common';
 import {ValidationException} from './validation.exception';
 
+// if you use Partial on the controller body, will not be triggered!
 @Catch(ValidationException)
 export class ValidationFilter implements ExceptionFilter {
   catch(exception: ValidationException, host: ArgumentsHost): any {

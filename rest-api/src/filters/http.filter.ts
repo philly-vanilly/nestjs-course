@@ -1,8 +1,9 @@
 import {ArgumentsHost, Catch, ExceptionFilter, HttpException} from '@nestjs/common';
 
+// if you use Partial on the controller body, will not be triggered!
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-    catch(exception: any, host: ArgumentsHost): any {
+    catch(exception: HttpException, host: ArgumentsHost): any {
       console.log("Http exception handler triggered ", JSON.stringify(exception));
 
       const ctx = host.switchToHttp();

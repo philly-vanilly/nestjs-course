@@ -1,7 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
-import {HttpExceptionFilter} from './filters/http-exception.filter';
-import {FallbackExceptionFilter} from './filters/fallback-exception.filter';
+import {HttpExceptionFilter} from './filters/http.filter';
+import {FallbackExceptionFilter} from './filters/fallback.filter';
 import * as mongoose from 'mongoose';
 import {ValidationError, ValidationPipe} from '@nestjs/common';
 import {ValidationFilter} from './filters/validation.filter';
@@ -17,6 +17,7 @@ async function bootstrap() {
   app.useGlobalFilters(
     // order important, from generic to specific
     new FallbackExceptionFilter(),
+    // if you use Partial on the controller body, these two will not be thrown:
     new HttpExceptionFilter(),
     new ValidationFilter() // implements HttpException so more specific
   );

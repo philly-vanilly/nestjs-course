@@ -47,7 +47,8 @@ export class CoursesController {
     // might as well use ParseIntPipe from NestJS or let Mongoose do the casting
     // (sometimes you want to do the casting before repository layer though)
     // @Body("seqNo", ToIntegerPipe) seqNo: string,
-    @Body() changes: Partial<Course>
+    // @Body() changes: Partial<Course> // if you use Partial, ValidationException will not be thrown!
+    @Body() changes: Course
   ): Promise<Course> {
     // you should return the promise even if you don't use the value in order for
     // NestJS to terminate the ongoing request
