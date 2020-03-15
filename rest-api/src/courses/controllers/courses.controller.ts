@@ -2,6 +2,7 @@ import {BadRequestException, Body, Controller, Delete, Get, HttpException, Param
 import {Course} from '../../../../shared/course';
 import {CoursesRepository} from '../repositories/courses.repository';
 import {Request, Response} from 'express';
+import {ToIntegerPipe} from '../pipes/to-integer.pipe';
 // import {HttpExceptionFilter} from '../../filters/http-exception.filter';
 
 @Controller('/courses')
@@ -43,6 +44,9 @@ export class CoursesController {
   // @UseFilters(new HttpExceptionFilter())
   async updateCourse(
     @Param("courseId") courseId: string,
+    // might as well use ParseIntPipe from NestJS or let Mongoose do the casting
+    // (sometimes you want to do the casting before repository layer though)
+    // @Body("seqNo", ToIntegerPipe) seqNo: string,
     @Body() changes: Partial<Course>
   ): Promise<Course> {
     // you should return the promise even if you don't use the value in order for
