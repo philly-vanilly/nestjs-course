@@ -1,5 +1,5 @@
 
-
+// one to many relationship: course can have many lessons; see  LessonsSchema
 export interface Lesson {
     id: number;
     description: string;

@@ -22,6 +22,10 @@ export class CoursesRepository {
     return this.courseModel.find();
   }
 
+  public async findCourseByUrl(url: string): Promise<Course> {
+    return this.courseModel.findOne({url});
+  }
+
   public async updateCourse(courseId: string, changes: Partial<Course>): Promise<Course> {
     return this.courseModel.findOneAndUpdate(
       {_id: courseId},
